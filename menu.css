@@ -1,0 +1,349 @@
+/* ====== Menu Section Styles ====== */
+
+.menu-section {
+    background: var(--bg-secondary);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    padding: var(--spacing-3xl) 0;
+    margin: var(--spacing-xl) 0;
+    border-radius: var(--border-radius-soft);
+    position: relative;
+    overflow: hidden;
+}
+
+.menu-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 30% 70%, rgba(255, 107, 157, 0.1) 0%, transparent 50%), radial-gradient(circle at 70% 30%, rgba(99, 102, 241, 0.1) 0%, transparent 50%);
+    pointer-events: none;
+}
+
+.menu-section>* {
+    position: relative;
+    z-index: 1;
+}
+
+.menu-section h2 {
+    text-align: center;
+    font-size: var(--font-size-4xl);
+    color: var(--text-dark);
+    margin-bottom: var(--spacing-2xl);
+    background: linear-gradient(45deg, var(--accent-primary), var(--accent-secondary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: 800;
+    font-family: var(--font-heading);
+    position: relative;
+}
+
+.menu-section h2::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 4px;
+    background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+    border-radius: 2px;
+}
+
+
+/* ====== Menu Tabs ====== */
+
+.menu-tabs {
+    display: flex;
+    justify-content: center;
+    margin-bottom: var(--spacing-2xl);
+    flex-wrap: wrap;
+    gap: var(--spacing-md);
+    padding: 0 var(--spacing-md);
+}
+
+.menu-tabs .tab {
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    padding: var(--spacing-sm) var(--spacing-lg);
+    border-radius: var(--border-radius-round);
+    cursor: pointer;
+    font-weight: 700;
+    transition: var(--transition-bounce);
+    border: 2px solid rgba(99, 102, 241, 0.2);
+    box-shadow: var(--box-shadow-light);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    color: var(--text-muted);
+    font-size: var(--font-size-sm);
+    position: relative;
+    overflow: hidden;
+}
+
+.menu-tabs .tab::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: left 0.5s;
+}
+
+.menu-tabs .tab:hover::before {
+    left: 100%;
+}
+
+.menu-tabs .tab:hover,
+.menu-tabs .tab.active {
+    background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+    color: var(--text-light);
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: var(--box-shadow-colored);
+    border-color: transparent;
+}
+
+.menu-tabs .tab i {
+    font-size: var(--font-size-base);
+}
+
+
+/* ====== Menu Grid ====== */
+
+.menu-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-2xl);
+    padding: 0 var(--spacing-md);
+}
+
+
+/* ====== Menu Items ====== */
+
+.menu-item {
+    background: var(--bg-primary);
+    border-radius: var(--border-radius-soft);
+    text-align: center;
+    padding: var(--spacing-md) var(--spacing-xs);
+    border: 2px solid rgba(99, 102, 241, 0.1);
+    transition: var(--transition-bounce);
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.menu-item::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg, transparent, rgba(255, 107, 157, 0.1), transparent);
+    transform: rotate(45deg);
+    transition: var(--transition-smooth);
+    opacity: 0;
+}
+
+.menu-item:hover::before {
+    opacity: 1;
+    animation: shimmer 2s ease-in-out;
+}
+
+@keyframes shimmer {
+    0% {
+        transform: translateX(-100%) translateY(-100%) rotate(45deg);
+    }
+    100% {
+        transform: translateX(100%) translateY(100%) rotate(45deg);
+    }
+}
+
+.menu-item:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: var(--box-shadow-medium);
+    border-color: var(--accent-secondary);
+}
+
+.menu-item.hidden {
+    display: none;
+}
+
+.menu-item img {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-bottom: var(--spacing-sm);
+    border: 3px solid var(--accent-gold);
+    transition: var(--transition-smooth);
+    box-shadow: var(--box-shadow-light);
+}
+
+.menu-item:hover img {
+    border-color: var(--accent-secondary);
+    transform: scale(1.1);
+}
+
+.menu-item h4 {
+    font-size: var(--font-size-sm);
+    margin: 0 0 var(--spacing-xs) 0;
+    font-weight: 700;
+    color: var(--accent-secondary);
+    font-family: var(--font-heading);
+    line-height: 1.3;
+}
+
+.menu-item p {
+    font-size: var(--font-size-xs);
+    color: var(--text-muted);
+    margin: var(--spacing-xs) 0 var(--spacing-sm);
+    line-height: 1.4;
+}
+
+.menu-item i.add-to-cart-icon {
+    color: var(--accent-gray);
+    font-size: var(--font-size-lg);
+    margin-top: var(--spacing-xs);
+    cursor: pointer;
+    transition: var(--transition-fast);
+    padding: var(--spacing-xs);
+    border-radius: 50%;
+    background: rgba(99, 102, 241, 0.1);
+}
+
+.menu-item i.add-to-cart-icon:hover {
+    color: var(--text-light);
+    background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+    transform: scale(1.2);
+    box-shadow: var(--box-shadow-light);
+}
+
+
+/* ====== Loading Animation for Menu Items ====== */
+
+.menu-item {
+    animation: fadeInUp 0.6s ease-out;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+/* ====== Responsive Design ====== */
+
+
+/* Tablet */
+
+@media (max-width: 768px) {
+    .menu-section {
+        padding: var(--spacing-2xl) 0;
+        margin: var(--spacing-md) 0;
+    }
+    .menu-section h2 {
+        font-size: var(--font-size-3xl);
+    }
+    .menu-tabs {
+        gap: var(--spacing-sm);
+        padding: 0 var(--spacing-sm);
+    }
+    .menu-tabs .tab {
+        padding: var(--spacing-xs) var(--spacing-md);
+        font-size: var(--font-size-xs);
+    }
+    .menu-grid {
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+        gap: var(--spacing-sm);
+        padding: 0 var(--spacing-sm);
+    }
+    .menu-item {
+        padding: var(--spacing-sm) var(--spacing-xs);
+    }
+    .menu-item img {
+        width: 50px;
+        height: 50px;
+    }
+}
+
+
+/* Mobile */
+
+@media (max-width: 480px) {
+    .menu-section h2 {
+        font-size: var(--font-size-2xl);
+    }
+    .menu-tabs {
+        gap: var(--spacing-xs);
+    }
+    .menu-tabs .tab {
+        padding: var(--spacing-xs) var(--spacing-sm);
+        font-size: var(--font-size-xs);
+    }
+    .menu-grid {
+        grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+        gap: var(--spacing-xs);
+        padding: 0 var(--spacing-xs);
+    }
+    .menu-item {
+        padding: var(--spacing-sm) var(--spacing-xs);
+    }
+    .menu-item img {
+        width: 45px;
+        height: 45px;
+    }
+    .menu-item h4 {
+        font-size: var(--font-size-xs);
+    }
+    .menu-item p {
+        font-size: 0.7rem;
+    }
+}
+
+
+/* Small Mobile */
+
+@media (max-width: 320px) {
+    .menu-grid {
+        grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
+    }
+    .menu-item img {
+        width: 40px;
+        height: 40px;
+    }
+    .menu-tabs .tab {
+        padding: var(--spacing-xs);
+        font-size: 0.7rem;
+    }
+}
+
+
+/* ====== Print Styles ====== */
+
+@media print {
+    .menu-tabs {
+        display: none;
+    }
+    .menu-item {
+        break-inside: avoid;
+        box-shadow: none;
+        border: 1px solid #ddd;
+    }
+    .menu-item:hover {
+        transform: none;
+    }
+}

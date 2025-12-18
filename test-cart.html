@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>اختبار السلة - LAOS DONUTS</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&family=Changa:wght@700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <link rel="stylesheet" href="common.css">
+</head>
+
+<body>
+
+    <!-- Header placeholder -->
+    <div id="header-placeholder"></div>
+
+    <section class="hero" style="padding: 100px 0; text-align: center;">
+        <div class="container">
+            <h1>اختبار السلة</h1>
+            <p>اختبر وظائف السلة هنا</p>
+
+            <div style="margin: 50px 0;">
+                <button class="btn" onclick="testAddToCart()">اختبار إضافة منتج</button>
+                <button class="btn" onclick="testOpenCart()">فتح السلة</button>
+                <button class="btn" onclick="testEmailJS()">اختبار EmailJS</button>
+                <button class="btn" onclick="console.log('Cart items:', cart)">عرض محتويات السلة</button>
+            </div>
+
+            <div id="test-results" style="margin-top: 30px; padding: 20px; background: #f0f0f0; border-radius: 10px;">
+                <h3>نتائج الاختبار:</h3>
+                <div id="test-output"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modals placeholder -->
+    <div id="modals-placeholder"></div>
+
+    <!-- Footer placeholder -->
+    <div id="footer-placeholder"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/emailjs-com@2/dist/email.min.js"></script>
+    <script src="script.js"></script>
+    <script src="common-elements.js"></script>
+
+    <script>
+        function logTest(message, type = 'info') {
+            const output = document.getElementById('test-output');
+            const timestamp = new Date().toLocaleTimeString();
+            output.innerHTML += `<div style="margin: 5px 0; color: ${type === 'error' ? 'red' : type === 'success' ? 'green' : 'black'}">[${timestamp}] ${message}</div>`;
+        }
+
+        function testAddToCart() {
+            try {
+                if (typeof addToCart === 'undefined') {
+                    logTest('❌ addToCart function not found', 'error');
+                    return;
+                }
+
+                addToCart({
+                    id: 'test-001',
+                    name: 'منتج تجريبي',
+                    price: 25.00
+                });
+
+                logTest('✅ تم إضافة المنتج التجريبي للسلة بنجاح', 'success');
+
+                // Check if cart badge updated
+                const badge = document.getElementById('cartBadge');
+                if (badge && badge.textContent === '1') {
+                    logTest('✅ تم تحديث عداد السلة بنجاح', 'success');
+                } else {
+                    logTest('❌ فشل في تحديث عداد السلة', 'error');
+                }
+
+            } catch (error) {
+                logTest('❌ خطأ في إضافة المنتج: ' + error.message, 'error');
+                console.error('Test error:', error);
+            }
+        }
+
+        function testOpenCart() {
+            try {
+                const modal = document.getElementById('cartModal');
+                if (modal) {
+                    modal.style.display = 'block';
+                    logTest('✅ تم فتح نافذة السلة', 'success');
+                } else {
+                    logTest('❌ نافذة السلة غير موجودة', 'error');
+                }
+            } catch (error) {
+                logTest('❌ خطأ في فتح السلة: ' + error.message, 'error');
+            }
+        }
+
+        // Log when page loads
+        window.addEventListener('load', function() {
+            logTest('✅ تم تحميل الصفحة بنجاح');
+
+            // Check if common elements are loaded
+            setTimeout(() => {
+                const cartBtn = document.getElementById('cartBtn');
+                const cartModal = document.getElementById('cartModal');
+
+                if (cartBtn) {
+                    logTest('✅ زر السلة موجود', 'success');
+                } else {
+                    logTest('❌ زر السلة غير موجود', 'error');
+                }
+
+                if (cartModal) {
+                    logTest('✅ نافذة السلة موجودة', 'success');
+                } else {
+                    logTest('❌ نافذة السلة غير موجودة', 'error');
+                }
+            }, 500);
+        });
+    </script>
+
+</body>
+
+</html>
